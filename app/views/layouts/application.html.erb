@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eventbrite2020</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Bootstrap CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css" rel="stylesheet" integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6" crossorigin="anonymous">    
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <% if notice %>
+      <div class='alert alert-success p-2'>
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class='alert alert-danger p-2'>
+        <%= alert %>
+      </div>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>  
+  </body>
+</html>

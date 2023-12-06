@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm" >
+            <h1 class="display-4"><%= @event.title %></h1>
+            <p class="lead"><%= @event.description %></p>
+            <h5 class="card-title">Participation :</h5>
+            <p><%= @event.users.count %></p>
+            <h5 class="card-title">Created by :</h5>
+            <p><%= User.find(@event.admin).profile.full_name%></p>
+            <h5 class="card-title">Début de l'évènement:</h5>
+            <p><%= @event.start_date.to_formatted_s(:long) %></p>
+            <h5 class="card-title">Fin de l'évènement:</h5>
+            <p><%= @event.end_date.to_formatted_s(:long) %></p>
+            <h5 class="card-title">Location:</h5>
+            <p><%= @event.location %></p>
+            <h5 class="card-title">Price:</h5>
+            <p><%= @event.price %> €</p>
+            <% if current_user.id == @event.admin %>
+                <%= link_to "Mon espace évènement", attendances_path(id: @event), class: "btn btn-secondary"%>
+            <% elsif current_user.id == @event.admin || @event.participale?(current_user) %>
+                <%= link_to "Tu participe déjà à l'évènement", class: "btn btn-secondary"%>
+            <% elsif @event.is_free? %>
+                <%= link_to "Participer à l'évènement", free_subscribe_path(id: @event), class: "btn btn-primary"%>
+            <% else %>
+                <%= form_tag subscribes_path do %>
+                    <article>
+                        <% if flash[:error].present? %>
+                        <div id="error_explanation">
+                            <p><%= flash[:error] %></p>
+                        </div>
+                        <% end %>
+                    </article>
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                            data-description="Event subscription"
+                            data-amount="<%= @event.price * 100 %>"
+                            data-currency="eur"
+                            data-locale="auto">
+                    </script>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>   

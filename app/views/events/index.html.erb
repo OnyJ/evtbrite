@@ -1,0 +1,14 @@
+<div class="album py-5 ">
+    <div class="container">
+        <div class="row">
+            <% @events.each do |event| %>
+                <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                        <h5 class="card-title"><%= event.title %></h5>
+                        <%= link_to "Go to this Event", event_path(event.id), :class => "btn btn-primary btn-xl text-uppercase js-scroll-trigger"%>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>     
+</div>

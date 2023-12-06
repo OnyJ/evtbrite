@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @user.profile.first_name %> !</h1>
+    <p>
+      Nous te confirmons ton inscription à l'évènement <%=@event.title %> qui aura lieu le <%= @event.start_date %> à <%= @event.location %>.
+    </p>
+    
+    <p> Merci pour ta confiance ! À très vite sur Eventbrite !
+  </body>
+</html>
